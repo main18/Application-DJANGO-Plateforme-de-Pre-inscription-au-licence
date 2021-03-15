@@ -1,0 +1,200 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <!--JQUERY-->
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+      <!--FontAwesome-->
+      <link rel="stylesheet" href="{% static 'CSS/all.min.css' %}">
+  
+      <!--Bootstrap-->
+      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+      <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+          integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+          crossorigin="anonymous"></script>
+      <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+          integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+          crossorigin="anonymous"></script>
+      <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+          integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+          crossorigin="anonymous"></script>
+    <link href="https://fonts.googleapis.com/css?family=Rubik&display=swap" rel="stylesheet">
+
+    <!-- <link href="{% static 'css/main.css' %}" rel="stylesheet" type="text/css"> -->
+    <style>
+        /*generale*/
+        form{
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        * {
+            padding: 0;
+            margin: 0;
+            font-family: 'Rubik', sans-serif;
+        }
+
+        a {
+            text-decoration: none;
+            color: rgba(230, 230, 230, 0.9);
+        }
+
+        a:hover {
+            text-decoration: none;
+        }
+
+        .navbar {
+            z-index: 5;
+            position: fixed;
+            top: 0;
+            width: 100%;
+        }
+
+        .navbar-brand {
+            margin-left: 28px;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .header {
+            margin: 15px 0 0 15px;
+            border-bottom: 2px solid rgba(100, 100, 100, 0.3);
+            padding-bottom: 10px;
+        }
+
+        .heading {
+            text-align: center;
+            margin-top: 5rem;
+            margin-bottom: 50px;
+        }
+
+        .form-control {
+            font-size: 16px;
+            border: 1px solid rgba(100, 100, 100, 0.3);
+            margin-bottom: 10px;
+        }
+
+        .jumbotron {
+            border: 2px solid #B3B7BB;
+            margin-top: 50px;
+        }
+        label{
+            font-size: 1rem;
+            font-weight: bold;
+        }
+        .autreField2{
+            display: none;
+        }
+        .navbar{
+            display: flex !important;
+            justify-content: space-between;
+        }
+
+    </style>
+    <title>resultat diplome bac + 2</title>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark mr-1">
+        <a class="navbar-brand" href="http://127.0.0.1:8000">EST CASABLANCA</a>
+        {% if is_authenticated %}
+            <a href="http://127.0.0.1:8000/logout" class="btn btn-danger">Logout</a>
+        {% endif %}
+    </nav>
+    <div class="container">
+        <h2 class="heading">resultat diplome bac + 2</h2>
+        <form action="" method="POST" novalidate>
+            {{ form.Annee1ereDiplome.label }}
+            {{ form.Annee1ereDiplome }}
+            <br>
+            <br>
+            {{ form.AnneeObtention.label }}
+            {{ form.AnneeObtention }}
+            <br>
+            <br>
+            {{ form.DureeObtention.label }}
+            {{ form.DureeObtention }}
+            <br>
+            <br>
+            {{ form.Note1ereS.label }}
+            {{ form.Note1ereS }}
+            <br>
+            <br>
+
+            {{ form.Note2emeS.label }}
+            {{ form.Note2emeS }}
+            <br>
+            <br>
+            {{ form.NoteObtention.label }}
+            {{ form.NoteObtention }}
+            <br>
+            <br>
+            {{ form.NoteS1.label }}
+            {{ form.NoteS1 }}
+            <br>
+            <br>
+            {{ form.NoteS2.label }}
+            {{ form.NoteS2 }}
+            <br>
+            <br>
+            {{ form.NoteS3.label }}
+            {{ form.NoteS3 }}
+            <br>
+            <br>
+            {{ form.NoteS4.label }}
+            {{ form.NoteS4 }}
+            <br>
+            <br>
+            <p class="typeDiplome" style="display: none;">{{ typeDiplome }}</p>
+            <input type="submit" class="btn btn-dark" value="Terminer">
+            {% csrf_token %}
+        </form>
+    </div>
+    <style>
+        #id_Note1ereS, #id_Note2emeS, #id_NoteObtention, #id_NoteS1, #id_NoteS2, #id_NoteS3, #id_NoteS4{
+            display: none;
+        }
+    </style>
+    <script>
+        //Type diplome 
+        var typeDiplome = document.querySelector(".typeDiplome").innerHTML ;
+        //DUT + BTS
+        var Note1ereS = document.querySelector("#id_Note1ereS");
+        var Note2emeS = document.querySelector("#id_Note2emeS");
+        //DTS
+        var NoteObtention = document.querySelector("#id_NoteObtention");
+        //DEUG + DEUST + DEUT
+        var NoteS1 = document.querySelector("#id_NoteS1");
+        var NoteS2 = document.querySelector("#id_NoteS2");
+        var NoteS3 = document.querySelector("#id_NoteS3");
+        var NoteS4 = document.querySelector("#id_NoteS4");
+
+        if(typeDiplome == "Dut + BTS"){
+            Note1ereS.style.display = "block";
+            Note2emeS.style.display = "block";
+        }
+        if(typeDiplome == "DTS"){
+            NoteObtention.style.display = "block";
+        }
+        if(typeDiplome == "DEUG + DEUST + DEUT"){
+            NoteS1.style.display = "block";
+            NoteS2.style.display = "block";
+            NoteS3.style.display = "block";
+            NoteS4.style.display = "block";
+        }
+    </script>
+</body>
+
+</html>
